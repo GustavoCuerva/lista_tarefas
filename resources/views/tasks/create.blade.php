@@ -7,7 +7,8 @@
     <section class="container">
         <div class="col-md-6 offset-md-3 mt-5 mb-5 form">
             <h2 class="title-form">Crie uma tarefa</h2>
-            <form action="" method="POST">
+            <form action="/tasks" method="POST">
+                @csrf
                 <div class="form-group">
                     <label for="title">Tarefa:</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Nome da tarefa" required>

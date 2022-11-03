@@ -34,6 +34,14 @@
         </header>
 
         <main>
+
+            <!-- Checking if there is a message in the session, if there is, it will display it. -->
+            @if(session('msg'))
+                <div class="container mt5">
+                    <p class="msg">{{session('msg')}}</p>
+                </div>
+            @endif
+
             @yield('content')
         </main>
 
