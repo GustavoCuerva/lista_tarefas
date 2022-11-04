@@ -7,6 +7,7 @@
     <section class="container tabela">
         <h1>Listar Tarefas</h1>
 
+        @if(count($tasks) > 0)
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
@@ -33,5 +34,11 @@
                 @endforeach    
             </tbody>
         </table>
+        @else
+        <div style="text-align: center;">
+            <h3>Sem registros</h3>
+        </div>
+        @endif
+
     </section>
 @endsection

@@ -18,13 +18,22 @@ class TaskController extends Controller
     }
 
     public function list(){
-        $tasks = Task::all();
+        $id = auth()->user()->id;
+
+        $tasks = Task::all()->where('user_id', $id);
 
         return view('tasks.list', ['tasks' => $tasks]);
     }
 
     public function show($id){
+
+        $user_id = auth()->user()->id;
+
         $task = Task::findOrFail($id);
+
+        if ($user_id != $task->user_id) {
+            return redirect('tasks/list');
+        }
 
         return view('tasks.show', ['task' => $task]);
     }
@@ -39,6 +48,10 @@ class TaskController extends Controller
         $tasks->hora = $request->hour;
         $tasks->urgency = $request->urgency;
         $tasks->done = 0;
+
+        $user = auth()->user();
+
+        $tasks->user_id = $user->id;
 
         $tasks->save();
 

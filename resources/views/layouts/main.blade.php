@@ -27,7 +27,13 @@
                     <ul class="d-flex menu">
                         <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                         <li href="" class="nav-item"><a href="/tasks/create" class="nav-link">Cadastrar tarefa</a></li>
-                        <li class="nav-item"><a href="/" class="nav-link">Sair</a></li>
+                        <li class="nav-item">
+                            <form action="/logout" method="post">
+                                @csrf
+                                <a href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
+                            </form>
+                            
+                        </li>
                     </ul>
                 </div>
             </nav>

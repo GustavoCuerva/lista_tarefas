@@ -15,9 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TaskController;
 
-Route::get('/', [TaskController::class, 'index']);
-Route::get('/tasks/create', [TaskController::class, 'create']);
-Route::get('/tasks/list', [TaskController::class, 'list']);
-Route::get('/tasks/{id}', [TaskController::class, 'show']);
-Route::post('/tasks', [TaskController::class, 'store']);
-Route::put('/tasks/update/{id}', [TaskController::class, 'update']);
+Route::get('/', [TaskController::class, 'index'])->middleware('auth');
+Route::get('/tasks/create', [TaskController::class, 'create'])->middleware('auth');
+Route::get('/tasks/list', [TaskController::class, 'list'])->middleware('auth');
+Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware('auth');
+Route::post('/tasks', [TaskController::class, 'store'])->middleware('auth');
+Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->middleware('auth');
+
+// Login / Register
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
