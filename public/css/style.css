@@ -54,6 +54,15 @@ footer{
     margin: 30px;
 }
 
+.input_done{
+    text-align: center;
+}
+
+#done{
+    height: 20px;
+    width: 20px;
+}
+
 /* Tarefa */
 
 .center{

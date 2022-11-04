@@ -28,8 +28,8 @@
                         <td scropt="row">{{ date("d/m/y", strtotime($task->data)) }}</td>
                         <td scropt="row">{{ date("H:i", strtotime($task->hora)) }}</td>
                         <td scropt="row">{{ $task->description }}</td>
-                        <td scropt="row">{{ $task->done }}</td>
-                        <td scropt="row"><a href="">Editar</a> <a href="">Excluir</a></td>
+                        <td scropt="row" class="input_done"><input type="checkbox" name="done" id="done" {{ $task->done == 1 ? 'checked' : '' }} disabled></td>
+                        <td scropt="row" style="text-align: center;"><a href="/tasks/edit/{{$task->id}}" class="btn btn-primary">Editar</a> <a href="" class='btn btn-danger'>Excluir</a></td>
                     </tr>
                 @endforeach    
             </tbody>

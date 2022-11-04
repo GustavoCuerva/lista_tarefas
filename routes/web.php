@@ -17,9 +17,11 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [TaskController::class, 'index'])->middleware('auth');
 Route::get('/tasks/create', [TaskController::class, 'create'])->middleware('auth');
+Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->middleware('auth');
 Route::get('/tasks/list', [TaskController::class, 'list'])->middleware('auth');
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware('auth');
 Route::post('/tasks', [TaskController::class, 'store'])->middleware('auth');
+Route::put('/tasks/updateDone/{id}', [TaskController::class, 'updateDone'])->middleware('auth');
 Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->middleware('auth');
 
 // Login / Register

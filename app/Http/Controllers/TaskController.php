@@ -38,14 +38,26 @@ class TaskController extends Controller
         return view('tasks.show', ['task' => $task]);
     }
 
+    public function edit($id){
+        $task = Task::findorFail($id);
+
+        $user_id = auth()->user()->id;
+
+        if ($user_id != $task->user_id) {
+            return redirect('/tasks/list');
+        }
+
+        return view('tasks.create', ['task' => $task]);
+    }
+
     /* Salvar tarefa */
     public function store(Request $request){
         $tasks = new Task;
 
-        $tasks->name = $request->title;
+        $tasks->name = $request->name;
         $tasks->description = $request->description;
-        $tasks->data = $request->date;
-        $tasks->hora = $request->hour;
+        $tasks->data = $request->data;
+        $tasks->hora = $request->hora;
         $tasks->urgency = $request->urgency;
         $tasks->done = 0;
 
@@ -55,13 +67,13 @@ class TaskController extends Controller
 
         $tasks->save();
 
-        return redirect('/tasks/create')->with('msg', 'Tarefa criada com sucesso');
+        return redirect('/tasks/list')->with('msg', 'Tarefa criada com sucesso');
     }
 
     /* Tarefa feita */
-    public function update(Request $request){
+    public function updateDone(Request $request){
         
-        Task::findOrFail($request->id)->update(['done' => $request->done]);
+        Task::findOrFail($request->id)->update($request->all());
 
         $msg = 'Tarefa feita com sucesso';
 
@@ -71,5 +83,20 @@ class TaskController extends Controller
 
         return redirect('/tasks/list')->with('msg', $msg);
 
+    }
+
+    /* Edita tarefa */
+    public function update(Request $request){
+
+        $user_id = auth()->user()->id;
+        $task_user = Task::findOrFail($request->id);
+
+        if ($user_id != $task_user->user_id) {
+            return redirect('/tasks/list');
+        }
+
+        Task::findOrFail($request->id)->update($request->all());
+
+        return redirect('/tasks/list')->with('msg', 'Tarefa editada com sucesso');
     }
 }
