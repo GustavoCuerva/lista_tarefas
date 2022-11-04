@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'itens' => 'array'
+    ];
+
+    protected $dates = ['date'];
+
+    protected $guarded = [];
 }

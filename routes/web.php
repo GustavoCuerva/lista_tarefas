@@ -17,5 +17,7 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [TaskController::class, 'index']);
 Route::get('/tasks/create', [TaskController::class, 'create']);
-Route::get('tasks/list', [TaskController::class, 'list']);
+Route::get('/tasks/list', [TaskController::class, 'list']);
+Route::get('/tasks/{id}', [TaskController::class, 'show']);
 Route::post('/tasks', [TaskController::class, 'store']);
+Route::put('/tasks/update/{id}', [TaskController::class, 'update']);

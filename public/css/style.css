@@ -36,3 +36,37 @@ footer{
     padding: 10px;
     border-radius: 5px;
 }
+
+/* Mensagem de sucesso */
+
+.msg{
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    background: #d6e0d6;
+    color: green;
+}
+
+
+/* Lista tarefas */
+
+.tabela h1{
+    margin: 30px;
+}
+
+/* Tarefa */
+
+.center{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.task-title{
+    border-bottom: 1px solid #cccccc;
+}
+
+.card_task>div{
+    flex: 1;
+}
