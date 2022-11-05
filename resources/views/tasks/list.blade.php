@@ -29,7 +29,14 @@
                         <td scropt="row">{{ date("H:i", strtotime($task->hora)) }}</td>
                         <td scropt="row">{{ $task->description }}</td>
                         <td scropt="row" class="input_done"><input type="checkbox" name="done" id="done" {{ $task->done == 1 ? 'checked' : '' }} disabled></td>
-                        <td scropt="row" style="text-align: center;"><a href="/tasks/edit/{{$task->id}}" class="btn btn-primary">Editar</a> <a href="" class='btn btn-danger'>Excluir</a></td>
+                        <td scropt="row" style="text-align: center; display:flex;">
+                            <a href="/tasks/edit/{{$task->id}}" class="btn btn-primary m-auto">Editar</a>
+                            <form action="/tasks/{{$task->id}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger" value="Excluir">
+                            </form>
+                        </td>
                     </tr>
                 @endforeach    
             </tbody>

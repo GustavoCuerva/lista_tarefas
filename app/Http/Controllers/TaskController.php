@@ -10,7 +10,13 @@ class TaskController extends Controller
 {
 
     public function index(){
-        return view('welcome');
+
+        $id = auth()->user()->id;
+
+        $tasks = Task::where('user_id', $id)->get();
+        $group_tasks = $tasks->groupBy('data');
+
+        return view('welcome', ['group_tasks' => $group_tasks]);
     }
 
     public function create(){
@@ -20,7 +26,7 @@ class TaskController extends Controller
     public function list(){
         $id = auth()->user()->id;
 
-        $tasks = Task::all()->where('user_id', $id);
+        $tasks = Task::where('user_id', $id)->orderBy('done', "asc")->orderBy('data', "asc")->orderBy('hora')->get();
 
         return view('tasks.list', ['tasks' => $tasks]);
     }
@@ -98,5 +104,22 @@ class TaskController extends Controller
         Task::findOrFail($request->id)->update($request->all());
 
         return redirect('/tasks/list')->with('msg', 'Tarefa editada com sucesso');
+    }
+
+    /* Deletando tarefa */
+
+    public function destroy($id){
+
+        $task = Task::findOrFail($id);
+        $user_id = auth()->user()->id;
+
+        if ($task->user_id != $user_id) {
+            return redirect('/tasks/list');
+        }
+
+        $task->delete();
+
+        return redirect('/tasks/list')->with('msg', 'Tarefa excluida com sucesso');
+
     }
 }

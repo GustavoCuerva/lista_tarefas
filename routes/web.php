@@ -23,6 +23,7 @@ Route::get('/tasks/{id}', [TaskController::class, 'show'])->middleware('auth');
 Route::post('/tasks', [TaskController::class, 'store'])->middleware('auth');
 Route::put('/tasks/updateDone/{id}', [TaskController::class, 'updateDone'])->middleware('auth');
 Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->middleware('auth');
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->middleware('auth');
 
 // Login / Register
 Route::middleware([
