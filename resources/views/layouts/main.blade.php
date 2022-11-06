@@ -21,7 +21,7 @@
         <header>
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
-                    <form action="" method="post">
+                    <form action="/tasks/list" method="GET">
                         <input type="search" class="form-control" name="search" id="search" placeholder="Pesquisar tarefa">
                     </form>
                     <ul class="d-flex menu">

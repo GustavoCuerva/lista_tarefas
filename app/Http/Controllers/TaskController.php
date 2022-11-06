@@ -11,12 +11,35 @@ class TaskController extends Controller
 
     public function index(){
 
-        $id = auth()->user()->id;
+        $dia_semana = array(
+            'Sun' => 'Domingo', 
+            'Mon' => 'Segunda-Feira',
+            'Tue' => 'Terca-Feira',
+            'Wed' => 'Quarta-Feira',
+            'Thu' => 'Quinta-Feira',
+            'Fri' => 'Sexta-Feira',
+            'Sat' => 'Sábado'
+        );
 
-        $tasks = Task::where('user_id', $id)->get();
+        $id = auth()->user()->id;
+        $hoje = date("Y-m-d");
+        $semana = date("Y-m-d", 60*60*24*8+ strtotime($hoje));
+
+        // Próximas tarefas
+        $tasks = Task::where('user_id', $id)
+                ->where('data', ">=" , $hoje)
+                ->where('data', "<" , $semana)
+                ->orderBy('data', "asc")
+                ->get();
         $group_tasks = $tasks->groupBy('data');
 
-        return view('welcome', ['group_tasks' => $group_tasks]);
+        // Próximas tarefas
+        $tasks_all = Task::where('user_id', $id)
+                ->orderBy('data', "desc")
+                ->get();
+        $group_tasks_all = $tasks_all->groupBy('data');
+        
+        return view('welcome', ['group_tasks' => $group_tasks, 'group_tasks_all' => $group_tasks_all, 'semana' => $dia_semana]);
     }
 
     public function create(){
@@ -25,8 +48,55 @@ class TaskController extends Controller
 
     public function list(){
         $id = auth()->user()->id;
+        $hoje = date("Y-m-d");
+        
+        $search = request('search');
 
-        $tasks = Task::where('user_id', $id)->orderBy('done', "asc")->orderBy('data', "asc")->orderBy('hora')->get();
+        if ($search) {
+            // Existe uma busca
+            $tasks = Task::where('user_id', $id)
+                    ->where('name', 'LIKE', '%'.$search.'%')
+                    ->where('data', '>=', $hoje)
+                    ->orderBy('done', "asc")
+                    ->orderBy('data', "asc")
+                    ->orderBy('hora')
+                    ->get();
+
+            $tasks_anteriores = Task::where('user_id', $id)
+                                ->where('name', 'LIKE', '%'.$search.'%')
+                                ->where('data', '<', $hoje)
+                                ->orderBy('done', "asc")
+                                ->orderBy('data', "asc")
+                                ->orderBy('hora')
+                                ->get();
+            
+        }else{
+            $tasks = Task::where('user_id', $id)
+                    ->where('data', '>=', $hoje)
+                    ->orderBy('done', "asc")
+                    ->orderBy('data', "asc")
+                    ->orderBy('hora')
+                    ->get();
+
+            $tasks_anteriores = Task::where('user_id', $id)
+                                ->where('data', '<', $hoje)
+                                ->orderBy('done', "asc")
+                                ->orderBy('data', "asc")
+                                ->orderBy('hora')
+                                ->get();
+        }
+
+        return view('tasks.list', ['tasks' => $tasks, 'tasks_anteriores' => $tasks_anteriores]);
+    }
+
+    public function list_filter($data){
+        $id = auth()->user()->id;
+        $tasks = Task::where('user_id', $id)
+                    ->where('data', $data)
+                    ->orderBy('done', "asc")
+                    ->orderBy('data', "asc")
+                    ->orderBy('hora')
+                    ->get();
 
         return view('tasks.list', ['tasks' => $tasks]);
     }

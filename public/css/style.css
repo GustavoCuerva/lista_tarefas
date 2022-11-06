@@ -37,6 +37,11 @@ footer{
     border-radius: 5px;
 }
 
+.container_listas{
+    width: 90%;
+    margin: auto;
+}
+
 /* Mensagem de sucesso */
 
 .msg{
@@ -61,6 +66,10 @@ footer{
 #done{
     height: 20px;
     width: 20px;
+}
+
+.anterior td{
+    opacity: 0.7;
 }
 
 /* Tarefa */
