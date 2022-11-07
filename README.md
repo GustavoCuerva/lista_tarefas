@@ -1,8 +1,8 @@
 
 # Lista de tarefas - Laravel
 
-Esse projeto foi feito por mim para treinar e testar os conhecimentos adquiridos com relação a ferramente laravel. Durante esse projeto foi utilizado bootstrap para facilitar o desenvolvimento do front-end, e php no backend.
-Ao utilizar o laravel foi possivel treinar conceitos do CRUD, rotas, controllers, migrate e configuração da aplicação em laravel. Devido o objetivo desse projeto ser aplicar os conceitos aprendidos sobre a ferramenta laravel, ele possui mais coisas do que o nescessário, mas que foram implementadas para treinamento.
+Esse projeto foi feito por mim para treinar e testar os conhecimentos adquiridos com relação a ferramente laravel. Durante esse projeto foi utilizado bootstrap para facilitar o desenvolvimento do front-end, e php no backend.<br>
+Ao utilizar o laravel foi possivel treinar conceitos do CRUD, rotas, controllers, migrate e configuração da aplicação em laravel. <br> Devido o objetivo desse projeto ser aplicar os conceitos aprendidos sobre a ferramenta laravel, ele possui mais coisas do que o nescessário, mas que foram implementadas para treinamento.
 ## Stack
 ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
 
