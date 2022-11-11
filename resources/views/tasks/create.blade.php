@@ -11,8 +11,10 @@
         $descripton = "";
         $urgency = "";
         $btn = "Criar";
-        $action = "/tasks";
+        $route = "store";
         $method = "";
+        $var = '';
+        $id='';
 
         if(isset($task)){
             $title = $task->name;
@@ -21,14 +23,15 @@
             $descripton = $task->description;
             $urgency = $task->urgency;
             $btn = "Editar";
-            $action = "/tasks/update/{$task->id}";
+            $route = 'tasks.update';
+            $id = $task->id;
         }
     @endphp
 
     <section class="container">
         <div class="col-md-6 offset-md-3 mt-5 mb-5 form">
             <h2 class="title-form">Crie uma tarefa</h2>
-            <form action="{{$action}}" method="POST">
+            <form action="{{ route($route, ['id' => $id])}}" method="POST">
                 @csrf
                 @if(isset($task))
                 @method('PUT')

@@ -16,7 +16,7 @@
                 <p>{{ date("d/m/Y", strtotime($task->data)) }} - {{ date("H:i", strtotime($task->hora)) }}</p>
                 <p>{{ $task->urgency }}</p>
 
-                <form action="/tasks/updateDone/{{$task->id}}" method="post">
+                <form action="{{route('tasks.done', ['id' => $task->id])}}" method="post">
                     @csrf
                     @method('PUT')
 

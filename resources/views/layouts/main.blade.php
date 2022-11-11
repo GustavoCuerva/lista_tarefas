@@ -21,13 +21,13 @@
         <header>
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
-                    <form action="/tasks/list" method="GET">
+                    <form action="{{route('tasks.list')}}" method="GET">
                         <input type="search" class="form-control" name="search" id="search" placeholder="Pesquisar tarefa">
                     </form>
                     <ul class="d-flex menu">
-                        <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                        <li href="" class="nav-item"><a href="/tasks/list" class="nav-link">Todas tarefas</a></li>
-                        <li href="" class="nav-item"><a href="/tasks/create" class="nav-link">Cadastrar tarefa</a></li>
+                        <li class="nav-item"><a href="{{route('index')}}" class="nav-link">Home</a></li>
+                        <li href="" class="nav-item"><a href="{{route('tasks.list')}}" class="nav-link">Todas tarefas</a></li>
+                        <li href="" class="nav-item"><a href="{{route('tasks.create')}}" class="nav-link">Cadastrar tarefa</a></li>
                         <li class="nav-item">
                             <form action="/logout" method="post">
                                 @csrf

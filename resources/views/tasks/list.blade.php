@@ -24,14 +24,14 @@
                 @foreach($tasks as $task)
                     <tr>
                         <td scropt="row">{{ $loop->index + 1 }}</td>
-                        <td scropt="row"><a href="/tasks/{{$task->id}}">{{ $task->name }}</a></td>
+                        <td scropt="row"><a href="{{route('tasks.show', ['id' => $task->id])}}">{{ $task->name }}</a></td>
                         <td scropt="row">{{ date("d/m/y", strtotime($task->data)) }}</td>
                         <td scropt="row">{{ date("H:i", strtotime($task->hora)) }}</td>
                         <td scropt="row">{{ $task->description }}</td>
                         <td scropt="row" class="input_done"><input type="checkbox" name="done" id="done" {{ $task->done == 1 ? 'checked' : '' }} disabled></td>
                         <td scropt="row" style="text-align: center; display:flex;">
-                            <a href="/tasks/edit/{{$task->id}}" class="btn btn-primary m-auto">Editar</a>
-                            <form action="/tasks/{{$task->id}}" method="post">
+                            <a href="{{ route('tasks.edit' , ['id' => $task->id])}}" class="btn btn-primary m-auto">Editar</a>
+                            <form action="{{ route('tasks.del', ['id' => $task->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" class="btn btn-danger" value="Excluir">
