@@ -88,3 +88,18 @@ footer{
 .card_task>div{
     flex: 1;
 }
+
+/* Página de erro */
+
+.erro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    color: #bbbbbb;
+}
+
+.erro h2{
+    margin-bottom: 1px solid #ccc;
+}

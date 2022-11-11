@@ -29,6 +29,8 @@ Route::prefix('/tasks')->group(function(){
     Route::delete('/{id}', [TaskController::class, 'destroy'])->middleware('auth')->name('tasks.del');
 });
 
+Route::fallback([TaskController::class, 'fallback']);
+
 // Login / Register
 Route::middleware([
     'auth:sanctum',

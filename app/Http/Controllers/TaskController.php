@@ -192,4 +192,8 @@ class TaskController extends Controller
         return redirect('/tasks/list')->with('msg', 'Tarefa excluida com sucesso');
 
     }
+
+    public function fallback(){
+        return view('fall');
+    }
 }
